@@ -1,0 +1,60 @@
+.layout {
+  height: 100vh;
+
+  .sider {
+    box-shadow: 2px 0 3px 2px rgba(0, 0, 0, 0.2);
+  }
+
+  .header {
+    background: white;
+    padding: 0 20px;
+    box-shadow: 0 1px 3px 1px rgba(0, 0, 0, .25);
+  }
+
+  .context {
+    margin: 10px 24px 0;
+  }
+
+  .footer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 30px;
+
+    svg {
+      margin: 0.4em;
+    }
+  }
+
+  .trigger {
+    font-size: 18px;
+    padding: 0 24px 0 12px;
+    transition: color .3s;
+
+    &:hover {
+      color: #1890ff;
+    }
+  }
+}
+
+.fade-enter {
+  opacity: 0;
+  transform: translateX(100%);
+}
+
+.fade-enter-active {
+  opacity: 1;
+  transform: translateX(0);
+  transition: all 500ms;
+}
+
+.fade-exit {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.fade-exit-active {
+  opacity: 0;
+  transform: translateX(-100%);
+  transition: all 500ms;
+}
