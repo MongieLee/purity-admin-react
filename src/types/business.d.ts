@@ -4,3 +4,8 @@ interface Result<T> {
     success: boolean;
     code: number;
 }
+
+interface Action<P> extends Dispatch{
+    type: string;
+    payload: P;
+}

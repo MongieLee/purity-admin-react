@@ -1,16 +1,13 @@
-import React, {FC} from "react";
-import {Button, Layout} from "antd";
+import React, {FC, useState} from "react";
+import {Layout} from "antd";
 import Sider from "antd/es/layout/Sider";
 import {Content, Header} from "antd/es/layout/layout";
 import styles from "./index.module.less";
-import {useDispatch, useSelector} from "react-redux";
 import SiderMenu from "./components/siderMenu";
 import {Outlet} from "react-router-dom";
 import config from "@/config";
 import {CopyrightOutlined, MenuFoldOutlined, MenuUnfoldOutlined} from "@ant-design/icons";
-import {useState} from "react";
 import MenuTabs from "@/layout/components/menuTabs";
-import {CSSTransition} from "react-transition-group";
 import AnimationRoutes from "@/components/animationRoutes/animationRoutes";
 
 
@@ -40,7 +37,6 @@ const AuthenticatedApp: FC = () => {
                 </Header>
                 <Content className={styles.context}>
                     <MenuTabs/>
-                    <Button onClick={() => setShow(!show)}>test</Button>
                     <main style={{height: `calc(100vh - ${contentDifferenceHeight}px)`}}>
                         <AnimationRoutes in={show}>
                             <Outlet/>

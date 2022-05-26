@@ -1,6 +1,9 @@
 import {legacy_createStore as createStore} from "redux";
-import userReducer from "@/store/reducers/userReducer";
+import reducer from "@/store/reducers";
 
-const store = createStore(userReducer);
+export type RootState = ReturnType<typeof reducer>
 
+const store = createStore(reducer);
+console.log(store);
+console.log(store.getState());
 export default store;
