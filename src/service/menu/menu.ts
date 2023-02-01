@@ -1,0 +1,71 @@
+import {deleteRequest, getRequest, postRequest, putRequest} from '../../utils/request';
+
+export type PermissionMenu = {
+  children: Array<PermissionMenu>,
+  compName: string,
+  icon?: string,
+  id: number,
+  isLnk: boolean,
+  name: string,
+  menuType: string,
+  path: string,
+  parentName?: string,
+  parentId?: number,
+  permission?: string[],
+  remark?: string,
+  sequence: number,
+  state: boolean,
+  visible: boolean,
+  createdAt: string
+}
+
+class MenuService {
+  /**
+   * 根据Id获取菜单
+   * @param id
+   */
+  static getMenuById(id: number) {
+    return getRequest(`api/v1/menu/getUserMenus/${id}`);
+  }
+
+  /**
+   * 获取全部菜单树
+   */
+  static getMenuTree() {
+    return getRequest('api/v1/menu/tree');
+  }
+
+  /**
+   * 获取当前用户自身菜单
+   */
+  static getMenuTreeOfSelf() {
+    return getRequest<PermissionMenu[]>('api/v1/menu/getUserMenus');
+  }
+
+  /**
+   * 创建菜单
+   * @param data
+   */
+  static createMenu(data: Record<string, any>) {
+    return postRequest(`api/v1/menu`, data);
+  }
+
+  /**
+   * 更新菜单
+   * @param id
+   * @param data
+   */
+  static updateMenu(id: number, data: Record<string, any>) {
+    return putRequest(`api/v1/menu/${id}`, data);
+  }
+
+  /**
+   * 删除菜单
+   * @param id
+   */
+  static deleteMenu(id: number) {
+    return deleteRequest(`api/v1/menu/${id}`);
+  }
+}
+
+export default MenuService;

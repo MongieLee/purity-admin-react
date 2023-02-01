@@ -1,11 +1,11 @@
 interface Result<T> {
-    msg?: string;
-    data: T | null;
-    success: boolean;
-    code: number;
+  msg?: string;
+  result: T | null;
+  success: boolean;
+  code: number;
 }
 
-interface Action<P> extends Dispatch{
-    type: string;
-    payload: P;
+interface Action<P> extends Dispatch {
+  type: string;
+  payload: P;
 }

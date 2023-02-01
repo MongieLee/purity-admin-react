@@ -1,0 +1,20 @@
+.container {
+  display: flex;
+  justify-content: space-between;
+
+  .rightBox {
+    display: flex;
+    height: 100%;
+
+    > .boxItem {
+      padding: 0 8px;
+      display: flex;
+      align-items: center;
+
+      &:hover {
+        cursor: pointer;
+        background-color: rgba(0, 0, 0, 0.025);
+      }
+    }
+  }
+}

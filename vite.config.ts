@@ -5,10 +5,14 @@ const path = require("path");
 
 // https://vitejs.dev/config/
 export default defineConfig({
-    plugins: [react()],
-    resolve: {
-        alias: {
-            "@": path.resolve(__dirname, "src")
-        }
+  plugins: [react()],
+  server: {
+    host: "0.0.0.0",
+    port: 8848
+  },
+  resolve: {
+    alias: {
+      "@": path.resolve(__dirname, "src")
     }
+  }
 });

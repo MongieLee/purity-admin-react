@@ -1,40 +1,63 @@
-import React, {FunctionComponent, useState, Fragment, FC} from 'react';
-import {Button, Form, Input, message} from "antd";
+import React, {FC, useState} from 'react';
+import {Button, Card, Form, Input, message} from "antd";
 import styleds from './index.module.less';
 import AuthService, {authFormData} from "@/service/auth/auth";
-import {useForm} from "antd/es/form/Form";
-import {useNavigate} from "react-router-dom";
+import {useLocation, useNavigate, useSearchParams} from "react-router-dom";
+import companyLogo from "@/assets/logo.png";
+import {UserOutlined, LockOutlined} from "@ant-design/icons"
+import {setAuthToken} from "@/utils/token";
 
-console.log(styleds);
+const topic = 'Purity Admin'
+const minorTitle = '后台管理系统';
 
 interface LoginProps {
-    [K: string]: any;
+  [K: string]: any;
 }
 
+const redirectKey = "redirect";
+
 const Login: FC<LoginProps> = () => {
-    const [isLogin, setIsLogin] = useState(true);
+  const [loginLoading, setLoginLoading] = useState(false);
+  const history = useNavigate();
+  const [searchParams] = useSearchParams();
+  console.log()
+  const login = async (value: authFormData) => {
+    value.tokenGrantType = "access_token";
+    setLoginLoading(true);
+    try {
+      const a = await AuthService.login(value);
+      console.log(a)
+      setAuthToken(a.result!.token, a.result!.expires)
+      message.success("登录成功！");
+      const redirectPath = searchParams.get(redirectKey);
+      history(redirectPath ? decodeURIComponent(redirectPath) : "/");
+    } catch (e) {
+      setLoginLoading(false);
+    }
+  };
 
-    const history = useNavigate();
-    const login = async (value: authFormData) => {
-        value.tokenGrantType = "access_token";
-        await AuthService.login(value);
-        message.success("登录成功！");
-        history("/");
-    };
-
-    return (<Fragment>
-        <Form onFinish={login} labelCol={{span: 4}} wrapperCol={{span: 16}} autoComplete={"off"}>
-            <Form.Item name={"username"} label={"用户名"} rules={[{required: true, message: "请输入用户名"}]}>
-                <Input/>
-            </Form.Item>
-            <Form.Item name={"password"} label={"密码"} rules={[{required: true, message: "请输入密码"}]}>
-                <Input.Password/>
-            </Form.Item>
-            <Form.Item>
-                <Button type={"primary"} htmlType={"submit"}>登录</Button>
-            </Form.Item>
+  return (
+    <div className={styleds.container}>
+      <Card className={styleds.cardDecorator}>
+        <div className={'dfcc'}>
+          <img alt={'company\'s logo'} width={50} src={companyLogo}/>
+          <span className={styleds.topic}>{topic}</span>
+        </div>
+        <p className={styleds.minorTopic}>{minorTitle}</p>
+        <Form onFinish={login} autoComplete={"off"}>
+          <Form.Item name={"username"} rules={[{required: true, message: "请输入用户名"}]}>
+            <Input prefix={<UserOutlined/>} placeholder={"默认账号为：superadmin"}/>
+          </Form.Item>
+          <Form.Item name={"password"} rules={[{required: true, message: "请输入密码"}]}>
+            <Input.Password prefix={<LockOutlined/>} placeholder={"默认密码为：123qwe"}/>
+          </Form.Item>
+          <Form.Item>
+            <Button loading={loginLoading} size={'large'} className={styleds.loginBtn} type={"primary"}
+                    htmlType={"submit"}>登录</Button>
+          </Form.Item>
         </Form>
-    </Fragment>);
+      </Card>
+    </div>);
 };
 
 export default Login;

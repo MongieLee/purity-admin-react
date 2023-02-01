@@ -1,6 +1,37 @@
-.test {
-    color: red;
-    > .aaa{
-        border: 1px solid red;
-    }
+.container {
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: calc(((100vw - 40rem) / 2) - 3.2rem),
+  calc(((100vw - 40rem) / 2) - 3.2rem), cover;
+  background-position: left bottom, right bottom;
+  background-image: url("@/assets/left.svg"), url("@/assets/right.svg");
+
+  > .cardDecorator {
+    width: 460px;
+    height: 50vh;
+    padding: 3.2rem;
+    box-shadow: rgba(0, 0, 0, 0.1) 0 0 10px;
+  }
+
+  .topic {
+    margin-left: 1rem;
+    font-size: 2.2rem;
+    font-weight: bold;
+  }
+
+  .minorTopic {
+    text-align: center;
+    font-size: 1.2rem;
+    color: #848587;
+  }
+
+  .loginBtn {
+    width: 100%;
+    margin-top: 12px;
+  }
 }

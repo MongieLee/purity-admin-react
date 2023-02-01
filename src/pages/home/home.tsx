@@ -4,26 +4,28 @@ import {connect} from "react-redux";
 import {RootState} from "@/store";
 import {Button} from "antd";
 import * as  userActions from "@/store/actions/userAction";
+import {StateUser} from "@/store/reducers/authReducer";
 
 type Props = ReturnType<typeof mapDispatchToProps> & ReturnType<typeof mapStateToProps>
 
-const Home: FC<Props> = ({user, updateUser, remove}) => {
-    return <div> home
-        <Button onClick={() => updateUser({a: 1121231})}>测试 redux</Button>
-        {JSON.stringify(user)}
-        <Button onClick={remove}>测试 redux</Button>
-    </div>;
+const Home: FC<Props> = ({updateUser, remove,userInfo}) => {
+  console.log(userInfo)
+  return <div> home
+    <Button onClick={remove}>测试 redux</Button>
+  </div>;
 };
 
 export function mapStateToProps(state: RootState) {
-    return {
-        user: state.auth.user
-    };
+  console.log('home\'s component get state',state)
+  state
+  return {
+    userInfo: state.auth as StateUser
+  };
 };
 
 // 最终简化ActionCreators
 function mapDispatchToProps(dispatch: Dispatch) {
-    return bindActionCreators(userActions, dispatch);
+  return bindActionCreators(userActions, dispatch);
 };
 
 // 使用bindActionCreators

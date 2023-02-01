@@ -1,7 +1,10 @@
-import React, {FC} from "react";
+import React, {FC, useEffect} from "react";
 
 const System: FC = () => {
-    return (<div style={{background: `red`}}> this is system page</div>);
+  useEffect(() => {
+    console.log('子路由useEffect执行了')
+  }, [])
+  return (<div id={'aaa'} style={{background: `red`}}> this is system page</div>);
 };
 
 export default System;

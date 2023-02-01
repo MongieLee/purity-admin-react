@@ -1,6 +1,12 @@
-import userReducer from "./userReducer";
-import {combineReducers} from "redux";
+import userReducer from "./authReducer";
+import {CombinedState, combineReducers, Reducer} from "redux";
+import {RootState} from "@/store";
+import menuReducer from "@/store/reducers/menuReducer";
 
-export default combineReducers({
-    auth: userReducer
+const reducers = combineReducers({
+  auth: userReducer,
+  permission: menuReducer
 });
+export default reducers;
+
+

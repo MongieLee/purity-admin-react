@@ -6,14 +6,13 @@ import * as UserActions from "@/store/actions/userAction";
 import {RootState} from "@/store";
 
 const User: FC = () => {
-    const userState = useSelector((state: RootState) => state.auth.user);
-    const dispatch = useDispatch();
+  const userState = useSelector((state: RootState) => state.auth);
+  const dispatch = useDispatch();
 
-    return (<div style={{background: `yellow`}}> this is user page
-        <Button onClick={() => dispatch(UserActions.updateUser({a: 1121231}))}>测试 redux</Button>
-        {JSON.stringify(userState)}
-        <Button onClick={() => dispatch(UserActions.remove())}>测试 redux</Button>
-    </div>);
+  return (<div style={{background: `yellow`}}> this is user page
+    {JSON.stringify(userState)}
+    <Button onClick={() => dispatch(UserActions.remove())}>测试 redux</Button>
+  </div>);
 };
 
 export default User;
