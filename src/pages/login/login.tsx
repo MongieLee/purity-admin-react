@@ -25,9 +25,8 @@ const Login: FC<LoginProps> = () => {
     value.tokenGrantType = "access_token";
     setLoginLoading(true);
     try {
-      const a = await AuthService.login(value);
-      console.log(a)
-      setAuthToken(a.result!.token, a.result!.expires)
+      const {token, expires} = await AuthService.login(value);
+      setAuthToken(token, expires);
       message.success("登录成功！");
       const redirectPath = searchParams.get(redirectKey);
       history(redirectPath ? decodeURIComponent(redirectPath) : "/");

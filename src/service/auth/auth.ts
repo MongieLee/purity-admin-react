@@ -1,4 +1,5 @@
-import request, {getRequest} from "@/utils/request";
+import request, {getRequest, putRequest} from "@/utils/request";
+import {PasswordState} from "@/pages/system/changePassword/changePassword";
 
 type TokenGrantType = "access_token" | "access_token"
 
@@ -48,6 +49,13 @@ class AuthService {
    */
   static getUserInfo() {
     return getRequest<authInfoResponse>("api/v1/users/info");
+  }
+
+  /**
+   * 更新用户密码
+   */
+  static changePassword(data: PasswordState) {
+    return putRequest('api/v1/users/updatePassword', data);
   }
 }
 

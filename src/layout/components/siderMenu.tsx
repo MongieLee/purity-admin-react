@@ -2,7 +2,7 @@ import React, {FC, Fragment, useEffect, useState} from "react";
 import {Menu, MenuProps} from "antd";
 import {HomeOutlined, UserOutlined} from "@ant-design/icons";
 import styles from "./siderMenu.module.less";
-import {Link, useNavigate} from "react-router-dom";
+import {Link, useLocation, useNavigate} from "react-router-dom";
 import config from "@/config";
 import Logo from "@/assets/logo.png";
 import {connect} from "react-redux";
@@ -10,6 +10,8 @@ import {RootState} from "@/store";
 import useUpdatedEffect from "antd/es/typography/hooks/useUpdatedEffect";
 import MenuService, {PermissionMenu} from "@/service/menu/menu";
 import {ItemType, MenuItemType} from "antd/es/menu/hooks/useItems";
+import {setMenus} from "@/store/actions/menuAction";
+import {dynamicAddRoute} from "@/router/config";
 
 const menuList = [
   {key: "/", icon: <HomeOutlined/>, label: "首页"},
@@ -32,31 +34,50 @@ type Props = ReturnType<typeof mapStateToProps>;
 
 const SiderMenu = ({menus}: Props) => {
   const [items, setItems] = useState<MenuItem[]>([]);
-
-  function menusFilter(data: (PermissionMenu) []) {
-    data.forEach((item) => {
-      items.push(getItem(item))
-    })
-    setItems([...items]);
-  }
+  const [menuSelectedKeys, setMenuSelectedKeys] = useState<Array<string>>([]);
 
   const navigate = useNavigate();
-  const menuChange: MenuProps["onClick"] = (props) => {
-    console.log(props.key);
-    navigate(props.key);
-  };
-
-  async function getSome() {
-    const menus = await MenuService.getMenuTreeOfSelf()
-    menusFilter(menus)
-    console.log('fuck:')
-    console.log(items);
-    console.log('fuck:')
-  }
+  const location = useLocation();
 
   useEffect(() => {
     getSome();
   }, []);
+
+  useEffect(() => {
+    const {hash, key, pathname, search, state} = location;
+    setMenuSelectedKeys([pathname]);
+  }, [location]);
+
+  const menuChange: MenuProps["onClick"] = ({key}) => {
+    navigate(key);
+  };
+
+  async function getSome() {
+    const menus = await MenuService.getMenuTreeOfSelf()
+    dynamicAddRoute(menus);
+    setMenus(menus);
+    setItems(menusFilter(menus));
+  }
+
+  function menusFilter(data: PermissionMenu []) {
+    const target: MenuItem[] = [];
+    data.forEach(({visible, path, state, name, id, children}) => {
+      if (visible && state) {
+        const temp: MenuItem = {label: name, key: path, children: []};
+        target.push(temp);
+        if (children.length) {
+          children.map(({name, path}) => {
+            if (visible && state) {
+              temp.children.push({label: name, key: path});
+            }
+          })
+        } else {
+          Reflect.deleteProperty(temp, 'children');
+        }
+      }
+    });
+    return target;
+  }
 
   return (<Fragment>
       <div className={styles.logo}>
@@ -65,12 +86,11 @@ const SiderMenu = ({menus}: Props) => {
           <h1 className={styles.systemName}>{config.systemName}</h1>
         </Link>
       </div>
-      <Menu onClick={(info) => menuChange(info)} theme={"dark"} mode={"inline"} defaultSelectedKeys={['1']}
-            items={items}/>
+      <Menu selectedKeys={menuSelectedKeys} onClick={menuChange} theme={"dark"} mode={"inline"} items={items}/>
     </Fragment>
   );
 };
-
+SiderMenu.displayName = 'fuck';
 const mapStateToProps = (state: RootState) => {
   return {
     menus: state.permission.menus
