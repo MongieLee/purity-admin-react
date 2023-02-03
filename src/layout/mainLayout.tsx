@@ -4,7 +4,7 @@ import Sider from "antd/es/layout/Sider";
 import {Content, Header} from "antd/es/layout/layout";
 import styles from "./index.module.less";
 import SiderMenu from "./components/siderMenu";
-import {Outlet, useNavigate} from "react-router-dom";
+import {Outlet, useMatches, useNavigate} from "react-router-dom";
 import config from "@/config";
 import {CopyrightOutlined, MenuFoldOutlined, MenuUnfoldOutlined} from "@ant-design/icons";
 import MenuTabs from "@/layout/components/menuTabs";
@@ -31,7 +31,7 @@ const MainLayout: FC = () => {
           <CustomHeader/>
         </Header>
         <Content className={styles.context}>
-          <MenuTabs/>
+          {/*<MenuTabs/>*/}
           <main>
             <AnimationRoutes in={show}>
               <Outlet/>

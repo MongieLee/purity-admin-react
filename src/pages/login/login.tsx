@@ -8,7 +8,7 @@ import {UserOutlined, LockOutlined} from "@ant-design/icons"
 import {setAuthToken} from "@/utils/token";
 
 const topic = 'Purity Admin'
-const minorTitle = '后台管理系统';
+const minorTitle = '一个简单的后台模板';
 
 interface LoginProps {
   [K: string]: any;

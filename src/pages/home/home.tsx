@@ -5,7 +5,7 @@ import {RootState} from "@/store";
 import {Button} from "antd";
 import * as  userActions from "@/store/actions/userAction";
 import {StateUser} from "@/store/reducers/authReducer";
-
+import p1 from "@/assets/logo.png"
 type Props = ReturnType<typeof mapDispatchToProps> & ReturnType<typeof mapStateToProps>
 
 const Home: FC<Props> = ({updateUser, remove,userInfo}) => {

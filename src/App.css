@@ -44,3 +44,14 @@
 button {
     font-size: calc(10px + 2vmin);
 }
+
+p{
+    margin-top: 0;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    margin-top: 0;
+    margin-bottom: 0.5em;
+    color: rgba(0, 0, 0, 0.85);
+    font-weight: 500;
+}

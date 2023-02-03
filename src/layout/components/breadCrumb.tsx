@@ -1,7 +1,9 @@
 import React, {FC} from 'react';
 import {Breadcrumb} from 'antd';
+import {useLocation,useMatch} from "react-router-dom";
 
 const BreadCrumb: FC = (props: any) => {
+
   // todo: 路由面包屑信息
   return (
     <Breadcrumb>
@@ -17,4 +19,4 @@ const BreadCrumb: FC = (props: any) => {
   )
 }
 
-export default BreadCrumb;
+export default (BreadCrumb);

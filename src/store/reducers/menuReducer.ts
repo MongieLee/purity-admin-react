@@ -1,8 +1,7 @@
-import {REMOVE, UPDATE} from "@/store/const/userConst";
-import {UserActionType} from "@/store/actions/userAction";
 import {authInfoResponse} from "@/service/auth/auth";
 import {CLEAR_STORE_MENUS, SET_MENUS, SET_PERMISSIONS} from "@/store/const/menuConst";
 import {getToken} from "@/utils/token";
+import {menuTypeEnum} from "@/router/config";
 
 export type StateUser = authInfoResponse | null
 
@@ -34,3 +33,20 @@ export default (state = initializationValue, action: any) => {
       return state;
   }
 };
+
+export function findBtnPermissions(menus: any) {
+  const result: string[] = [];
+  getBtn(menus, result);
+  return result;
+}
+
+function getBtn(list: any[], result: any[]) {
+  list.map(i => {
+    if (i.menuType === menuTypeEnum.button) {
+      result.push(i.permission);
+    }
+    if (i.children.length) {
+      getBtn(i.children, result);
+    }
+  })
+}

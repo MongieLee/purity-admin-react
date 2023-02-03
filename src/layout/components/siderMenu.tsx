@@ -1,4 +1,4 @@
-import React, {FC, Fragment, useEffect, useState} from "react";
+import React, {Fragment, useEffect, useState} from "react";
 import {Menu, MenuProps} from "antd";
 import {HomeOutlined, UserOutlined} from "@ant-design/icons";
 import styles from "./siderMenu.module.less";
@@ -7,11 +7,12 @@ import config from "@/config";
 import Logo from "@/assets/logo.png";
 import {connect} from "react-redux";
 import {RootState} from "@/store";
-import useUpdatedEffect from "antd/es/typography/hooks/useUpdatedEffect";
 import MenuService, {PermissionMenu} from "@/service/menu/menu";
-import {ItemType, MenuItemType} from "antd/es/menu/hooks/useItems";
-import {setMenus} from "@/store/actions/menuAction";
+import {ItemType} from "antd/es/menu/hooks/useItems";
+import * as menuActions from "@/store/actions/menuAction";
 import {dynamicAddRoute} from "@/router/config";
+import {findBtnPermissions} from "@/store/reducers/menuReducer";
+import {bindActionCreators, Dispatch} from "redux";
 
 const menuList = [
   {key: "/", icon: <HomeOutlined/>, label: "首页"},
@@ -29,10 +30,9 @@ function getItem(item: PermissionMenu): MenuItem {
   } as ItemType;
 }
 
-type Props = ReturnType<typeof mapStateToProps>;
+type Props = ReturnType<typeof mapStateToProps> & ReturnType<typeof mapDispatchToProps>;
 
-
-const SiderMenu = ({menus}: Props) => {
+const SiderMenu = ({menus, setPermissions, setMenus}: Props) => {
   const [items, setItems] = useState<MenuItem[]>([]);
   const [menuSelectedKeys, setMenuSelectedKeys] = useState<Array<string>>([]);
 
@@ -56,6 +56,8 @@ const SiderMenu = ({menus}: Props) => {
     const menus = await MenuService.getMenuTreeOfSelf()
     dynamicAddRoute(menus);
     setMenus(menus);
+    console.log(findBtnPermissions(menus))
+    setPermissions(findBtnPermissions(menus));
     setItems(menusFilter(menus));
   }
 
@@ -97,4 +99,9 @@ const mapStateToProps = (state: RootState) => {
   }
 }
 
-export default connect(mapStateToProps)(SiderMenu);
+const mapDispatchToProps = (dispatch: Dispatch) => {
+  console.log(menuActions)
+  return bindActionCreators(menuActions, dispatch)
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(SiderMenu);
