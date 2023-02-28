@@ -1,7 +1,7 @@
 import {Button, Card, Form, Input, message, Space} from "antd";
 import {useState} from "react";
 import {RuleObject, StoreValue} from "rc-field-form/lib/interface";
-import AuthService from "@/service/auth/auth";
+import AuthService from "@/service/auth";
 import {useNavigate} from "react-router-dom";
 import {clearAuthToken} from "@/utils/token";
 

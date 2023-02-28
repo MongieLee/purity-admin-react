@@ -7,7 +7,7 @@ import config from "@/config";
 import Logo from "@/assets/logo.png";
 import {connect} from "react-redux";
 import {RootState} from "@/store";
-import MenuService, {PermissionMenu} from "@/service/menu/menu";
+import MenuService, {PermissionMenu} from "@/service/menu";
 import {ItemType} from "antd/es/menu/hooks/useItems";
 import * as menuActions from "@/store/actions/menuAction";
 import {dynamicAddRoute} from "@/router/config";

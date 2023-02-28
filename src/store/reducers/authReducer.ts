@@ -1,6 +1,6 @@
 import {REMOVE, UPDATE} from "@/store/const/userConst";
 import {UserActionType} from "@/store/actions/userAction";
-import {authInfoResponse} from "@/service/auth/auth";
+import {authInfoResponse} from "@/service/auth";
 
 export type StateUser = authInfoResponse | null
 

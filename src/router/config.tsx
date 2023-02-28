@@ -4,7 +4,7 @@ import MainLayout from "@/layout/mainLayout";
 import NotFind from "@/pages/notFind";
 import ChangePassword from "@/pages/system/changePassword/changePassword";
 import Board from "@/pages/board/board";
-import {PermissionMenu} from "@/service/menu/menu";
+import {PermissionMenu} from "@/service/menu";
 import Menu from "@/pages/system/menu/menu";
 import User from "@/pages/system/user/user";
 import Role from "@/pages/system/role/role";

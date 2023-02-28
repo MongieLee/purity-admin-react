@@ -1,4 +1,4 @@
-import {authInfoResponse} from "@/service/auth/auth";
+import {authInfoResponse} from "@/service/auth";
 import {CLEAR_STORE_MENUS, SET_MENUS, SET_PERMISSIONS} from "@/store/const/menuConst";
 import {getToken} from "@/utils/token";
 import {menuTypeEnum} from "@/router/config";

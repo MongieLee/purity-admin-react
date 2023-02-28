@@ -22,7 +22,7 @@ import styleds from './department.module.less';
 import {ColumnHeightOutlined, SettingOutlined, SyncOutlined} from "@ant-design/icons";
 import {createElement, useEffect, useMemo, useState} from "react";
 import {SizeType} from "antd/es/config-provider/SizeContext";
-import DepartmentService, {DepartmentItem} from "@/service/department/department";
+import DepartmentService, {DepartmentItem} from "@/service/department";
 import {checkPermission, clearChildren, shallowCopy} from "@/utils";
 import {ColumnsType} from "antd/es/table";
 import {connect} from "react-redux";

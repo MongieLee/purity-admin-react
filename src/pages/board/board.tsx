@@ -1,6 +1,12 @@
 import React from "react";
+import CustomCharts from "@/components/echarts";
+import {Card} from "antd";
 
 const Board = () => {
-  return <div>Board page</div>
+  return (<div>
+    <Card>
+      <CustomCharts/>
+    </Card>
+  </div>);
 }
 export default Board;

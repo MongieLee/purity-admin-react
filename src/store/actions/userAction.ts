@@ -1,6 +1,6 @@
 import {REMOVE, UPDATE} from "@/store/const/userConst";
 import {Dispatch} from "redux";
-import AuthService from "@/service/auth/auth";
+import AuthService from "@/service/auth";
 
 export const updateUser = () => {
   console.log('action running [updateUser] ')

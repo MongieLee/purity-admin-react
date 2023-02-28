@@ -19,6 +19,24 @@ export type PermissionMenu = {
   createdAt: string
 }
 
+export interface SysMenuItem {
+  id?: number,
+  name?: string,
+  parentId?: number,
+  path?: string,
+  menuType?: "C" | "M" | "F",
+  sequence?: number,
+  visible?: boolean,
+  compName?: string,
+  permission?: string,
+  isLink?: boolean,
+  state?: boolean,
+  createdBy?: string,
+  createdAt?: string,
+  updatedBy?: string,
+  updatedAt?: string
+}
+
 class MenuService {
   /**
    * 根据Id获取菜单
@@ -55,8 +73,8 @@ class MenuService {
    * @param id
    * @param data
    */
-  static updateMenu(id: number, data: Record<string, any>) {
-    return putRequest(`api/v1/menu/${id}`, data);
+  static updateMenu( data: Record<string, any>) {
+    return putRequest(`api/v1/menu`, data);
   }
 
   /**

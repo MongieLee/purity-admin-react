@@ -17,7 +17,7 @@ import {exitFullScreen, openFullScreen} from "@/utils/fullScreen";
 import DefaultAvatar from "@/assets/default-avatar.png";
 import {connect} from "react-redux";
 import {RootState} from "@/store";
-import AuthService, {authInfoResponse} from "@/service/auth/auth";
+import AuthService, {authInfoResponse} from "@/service/auth";
 import {bindActionCreators, Dispatch} from "redux";
 import {UPDATE} from "@/store/const/userConst";
 import {updateUser} from "@/store/actions/userAction";

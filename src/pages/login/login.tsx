@@ -1,14 +1,14 @@
 import React, {FC, useState} from 'react';
 import {Button, Card, Form, Input, message} from "antd";
 import styleds from './index.module.less';
-import AuthService, {authFormData} from "@/service/auth/auth";
+import AuthService, {authFormData} from "@/service/auth";
 import {useLocation, useNavigate, useSearchParams} from "react-router-dom";
 import companyLogo from "@/assets/logo.png";
 import {UserOutlined, LockOutlined} from "@ant-design/icons"
 import {setAuthToken} from "@/utils/token";
 
 const topic = 'Purity Admin'
-const minorTitle = '一个简单的后台模板';
+const minorTitle = '一个简洁的后台模板';
 
 interface LoginProps {
   [K: string]: any;
